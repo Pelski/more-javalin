@@ -5,7 +5,7 @@ import java.util.concurrent.Executors
 
 fun main() {
     val sseClients = mutableListOf<SseClient>()
-    generateRandomValuesAndSendToSseClientsAndRenameLater(sseClients)
+    generateRandomValuesAndSendToAllClients_RenameLater(sseClients)
 
     val app = Javalin.create { config ->
         config.staticFiles.add("/public", Location.CLASSPATH)
@@ -22,7 +22,7 @@ fun main() {
     }
 }
 
-private fun generateRandomValuesAndSendToSseClientsAndRenameLater(sseClients: MutableList<SseClient>) {
+private fun generateRandomValuesAndSendToAllClients_RenameLater(sseClients: MutableList<SseClient>) {
     val executor = Executors.newVirtualThreadPerTaskExecutor();
     executor.submit {
         while (true) {
@@ -32,6 +32,3 @@ private fun generateRandomValuesAndSendToSseClientsAndRenameLater(sseClients: Mu
         }
     }
 }
-
-
-
