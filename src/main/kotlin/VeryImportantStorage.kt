@@ -10,6 +10,7 @@ object VeryImportantStorage {
     )
 
     private var index = 0
+
     fun getNext(): String {
         val next = storage[index]
         index = (index + 1) % storage.size
