@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     implementation("io.javalin:javalin-bundle:6.1.3")
+    implementation("com.aallam.openai:openai-client:3.7.2")
+    implementation("io.ktor:ktor-client-java:2.3.10")
     testImplementation(kotlin("test"))
 }
 

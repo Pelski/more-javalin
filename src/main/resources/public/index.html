@@ -1,19 +1,57 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Javalin Stream</title>
+    <title>Local LLM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+        input[type="text"] {
+            width: 70vw;
+            height: 30px;
+            font-size: 16px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        button {
+            height: 30px;
+            font-size: 16px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Kto jest dobrym kotkiem?</h1>
-    <img src="" style="max-height: 90vh" alt="Photo or something">
-
+    <div id="app">
+        <form>
+            <input type="text" name="text-input" placeholder="Tekst do zamiany w wektor...">
+            <button type="submit">Zamień na wektor</button>
+        </form>
+        <pre id="result"></pre>
+    </div>
     <script type="application/javascript">
-        const evtSource = new EventSource("/sse-stream");
-
-        evtSource.addEventListener("miau", (e) => {
-            console.log(`Received message: ${e.data}`);
-            document.querySelector("img").src =
-                `https://cataas.com/cat/says/${e.data}?font=Comic%20Sans%20MS&fontSize=30&fontColor=%23ff0000`;
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const textInput = formData.get('text-input');
+            console.log(textInput);
+            fetch('/embeddings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: textInput
+            })
+                .then(response => {
+                    let result = response.json()
+                    result.then(data => {
+                        console.log(data)
+                        document.getElementById('result').innerHTML = JSON.stringify(data, null, 2)
+                    })
+                })
         });
     </script>
 </body>
