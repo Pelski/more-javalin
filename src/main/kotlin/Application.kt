@@ -14,8 +14,6 @@ fun main() {
     app.sse("/sse-stream") { sse ->
         sse.keepAlive()
         sseClients.add(sse)
-        sse.sendEvent("welcome", "Hello World")
-
         sse.onClose {
             sseClients.remove(sse)
         }
@@ -26,12 +24,8 @@ private fun generateRandomValuesAndSendToSseClientsAndRenameLater(sseClients: Mu
     val executor = Executors.newVirtualThreadPerTaskExecutor();
     executor.submit {
         while (true) {
-            val randomValue = (0..100).random()
-            sseClients.forEach { it.sendEvent("add", randomValue) }
+            sseClients.forEach { it.sendEvent("miau", VeryImportantStorage.getNext()) }
             Thread.sleep(2500)
         }
     }
 }
-
-
-

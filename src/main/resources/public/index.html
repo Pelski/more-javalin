@@ -4,24 +4,15 @@
     <title>Javalin Stream</title>
 </head>
 <body>
-    <ul></ul>
+    <img src="https://cataas.com/cat/says/hello_world" alt="Cat" style="max-height: 90vh">
 
     <script type="application/javascript">
         const evtSource = new EventSource("/sse-stream");
-        const eventList = document.querySelector("ul");
 
-        evtSource.addEventListener("welcome", (e) => {
-            const newElement = document.createElement("li");
-
-            newElement.textContent = `Welcome message: ${e.data}`;
-            eventList.appendChild(newElement);
-        });
-
-        evtSource.addEventListener("add", (e) => {
-            const newElement = document.createElement("li");
-
-            newElement.textContent = `message: ${e.data}`;
-            eventList.appendChild(newElement);
+        evtSource.addEventListener("miau", (e) => {
+            console.log(`Received message: ${e.data}`);
+            document.querySelector("img").src =
+                `https://cataas.com/cat/says/${e.data}?font=Comic%20Sans%20MS&fontSize=30&fontColor=%23ff0000`;
         });
     </script>
 </body>
