@@ -1,0 +1,28 @@
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Javalin Stream</title>
+</head>
+<body>
+    <ul></ul>
+
+    <script type="application/javascript">
+        const evtSource = new EventSource("/sse-stream");
+        const eventList = document.querySelector("ul");
+
+        evtSource.addEventListener("welcome", (e) => {
+            const newElement = document.createElement("li");
+
+            newElement.textContent = `Welcome message: ${e.data}`;
+            eventList.appendChild(newElement);
+        });
+
+        evtSource.addEventListener("add", (e) => {
+            const newElement = document.createElement("li");
+
+            newElement.textContent = `message: ${e.data}`;
+            eventList.appendChild(newElement);
+        });
+    </script>
+</body>
+</html>
