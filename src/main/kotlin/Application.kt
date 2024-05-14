@@ -1,6 +1,6 @@
 import app.ConversationHandler
-import external.Point
 import external.LocalLLM
+import external.Point
 import external.VectorDatabase
 import io.javalin.Javalin
 import io.javalin.http.staticfiles.Location
