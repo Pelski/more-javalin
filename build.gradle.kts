@@ -15,6 +15,7 @@ dependencies {
     implementation("io.ktor:ktor-client-java:2.3.10")
     implementation("io.ktor:ktor-serialization-jackson:2.3.10")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.10")
+    implementation("io.github.amithkoujalgi:ollama4j:1.0.69")
     testImplementation(kotlin("test"))
 }
 
